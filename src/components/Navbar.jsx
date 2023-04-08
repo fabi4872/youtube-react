@@ -1,10 +1,10 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { styled } from '@mui/material/styles';
 
-const Offset = styled('div')(( { theme } ) => theme.mixins.toolbar);
+const Offset = styled('div')(( { theme } ) => theme.mixins.toolbar );
 
 export const Navbar = () => {
   return (
@@ -20,7 +20,7 @@ export const Navbar = () => {
             aria-label='open drawer'
             edge='start'
             size='large'
-            onClick={() => console.log('Botón drawer presionado')}
+            onClick={() => console.log('Icon button presionado')}
           >
             <MenuIcon />
           </IconButton>

@@ -1,5 +1,6 @@
 import { AppBar, Divider, Drawer, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@mui/material/styles';
 import { NavListItem } from './NavListItem';
 import IconButton from '@mui/material/IconButton';
@@ -7,6 +8,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const Offset = styled('div')(( { theme } ) => theme.mixins.toolbar );
+
+const useStyles = makeStyles( (theme) => ({
+  boxHeight: { 
+    height: theme.mixins.toolbar 
+  }
+}))
 
 const listItem = [
   {
@@ -17,6 +24,8 @@ const listItem = [
 ]
 
 export const Navbar = () => {  
+  const classes = useStyles();
+
   return (
     <>
       <AppBar>
@@ -61,7 +70,9 @@ export const Navbar = () => {
       <Drawer 
         variant='permanent'
       >
-        <Box>
+        <Box
+          
+        >
           <Offset />
           <Divider />
         </Box>

@@ -1,4 +1,4 @@
-import { AppBar, Drawer, Toolbar, Typography } from '@mui/material';
+import { AppBar, Divider, Drawer, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import { NavListItem } from './NavListItem';
@@ -61,6 +61,10 @@ export const Navbar = () => {
       <Drawer 
         variant='permanent'
       >
+        <Box>
+          <Offset />
+          <Divider />
+        </Box>
         <NavListItem listItem={ listItem } />
       </Drawer>
     </>

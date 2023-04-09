@@ -1,12 +1,22 @@
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { AppBar, Drawer, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
+import { NavListItem } from './NavListItem';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const Offset = styled('div')(( { theme } ) => theme.mixins.toolbar );
 
-export const Navbar = () => {
+const listItem = [
+  {
+    id: 1,
+    descripcion: 'Reportes',
+    componente: <AddBoxIcon />
+  }
+]
+
+export const Navbar = () => {  
   return (
     <>
       <AppBar>
@@ -47,6 +57,12 @@ export const Navbar = () => {
       </AppBar>
 
       <Offset />
+
+      <Drawer 
+        variant='permanent'
+      >
+        <NavListItem listItem={ listItem } />
+      </Drawer>
     </>
   )
 }

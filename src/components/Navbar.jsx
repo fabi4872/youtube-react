@@ -6,12 +6,16 @@ import { NavListItem } from './NavListItem';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 const Offset = styled('div')(( { theme } ) => theme.mixins.toolbar );
 
 const useStyles = makeStyles( (theme) => ({
-  boxHeight: { 
-    height: theme.mixins.toolbar 
+  appBar: { 
+    zIndex: `${ theme.zIndex.drawer - 1 } !important`
+  },
+  headDrawerHeight: {
+    height: `${ theme.mixins.toolbar } !important`
   }
 }))
 
@@ -28,7 +32,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <AppBar>
+      <AppBar className={ classes.appBar }>
         <Toolbar
           sx={{
             mx: 2
@@ -70,12 +74,34 @@ export const Navbar = () => {
       <Drawer 
         variant='permanent'
       >
-        <Box
-          
+        <Toolbar
+          className='headDrawerHeight'
+          sx={{
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
         >
-          <Offset />
-          <Divider />
-        </Box>
+          <Typography 
+            variant='subtitle2'
+            sx={{
+              fontWeight: 'bold'
+            }}  
+          >
+            Mostaza
+          </Typography>
+          <IconButton
+            aria-label='close drawer'
+            edge='start'
+            size='large'
+            onClick={ () => console.log('Icon button presionado') }
+            sx={{
+              p: 0
+            }}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+        </Toolbar>
+        <Divider />
         <NavListItem listItem={ listItem } />
       </Drawer>
     </>

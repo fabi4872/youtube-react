@@ -1,34 +1,44 @@
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { Box } from '@mui/system';
 
-export const NavListItem = ({ listItem }) => {
+export const NavListItem = ({ listItem, width }) => {  
   return (
     <>
       <Box
         sx={{
-          width: 240,
-          bgcolor: "#FFFFFF"
+          width: { width },
+          bgcolor: "#FFFFFF",
+          display: 'flex'
         }}
       >
-        <nav>
-          <List>
-            {
-              listItem.map( ( item ) => (
-                <ListItem 
-                  key={ item.id }
-                  disablePadding
+        <List>
+          {
+            listItem.map((item) => (
+              <ListItem
+                key={item.id}
+                disablePadding
+              >
+                <ListItemButton
+                  sx={{
+
+                    
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    
+                  }}
                 >
-                  <ListItemButton>
-                    <ListItemIcon>
-                      { item.componente }
-                    </ListItemIcon>
-                    <ListItemText primary={ item.descripcion } />
-                  </ListItemButton>
-                </ListItem>
-              ))
-            }
-          </List>
-        </nav>
+                  <ListItemIcon>
+                    {item.componente}
+                  </ListItemIcon>
+
+                  {(width == 240) && <ListItemText primary={item.descripcion} />}
+
+                </ListItemButton>
+              </ListItem>
+            ))
+          }
+        </List>
       </Box>
     </>
   )

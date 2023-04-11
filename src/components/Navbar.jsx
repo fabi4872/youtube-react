@@ -7,13 +7,17 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { useEffect, useState } from 'react';
 
 const Offset = styled('div')(( { theme } ) => theme.mixins.toolbar );
 
 const useStyles = makeStyles( (theme) => ({
-  appBar: { 
-    zIndex: `${ theme.zIndex.drawer - 1 } !important`
+  appBarFront: { 
+    zIndex: `${ theme.zIndex.drawer + 1 } !important`
   },
+  appBarBack: { 
+    zIndex: `${ theme.zIndex.drawer - 1 } !important`
+  },  
   headDrawerHeight: {
     height: `${ theme.mixins.toolbar } !important`
   }
@@ -30,9 +34,30 @@ const listItem = [
 export const Navbar = () => {  
   const classes = useStyles();
 
+  const [ open, setOpen ] = useState( false );
+  const [ widthDrawer, setWidthDrawer ] = useState( 30 );
+  const [ styleAppBar, setStyleAppBar ] = useState( classes.appBarFront );
+  
+  const onClickOpenMenu = () => {
+    setOpen( true );
+    setWidthDrawer( 240 );
+    setStyleAppBar( classes.appBarBack );
+  }
+
+  const onClickCloseMenu = () => {
+    setOpen( false );
+    setWidthDrawer( 30 );
+    setStyleAppBar( classes.appBarFront );
+  }
+
+  useEffect(() => {
+    
+  }, [ open ])
+  
+   
   return (
     <>
-      <AppBar className={ classes.appBar }>
+      <AppBar className={ styleAppBar }>
         <Toolbar
           sx={{
             mx: 2
@@ -43,7 +68,7 @@ export const Navbar = () => {
             aria-label='open drawer'
             edge='start'
             size='large'
-            onClick={() => console.log('Icon button presionado')}
+            onClick={ onClickOpenMenu }
           >
             <MenuIcon />
           </IconButton>
@@ -93,7 +118,7 @@ export const Navbar = () => {
             aria-label='close drawer'
             edge='start'
             size='large'
-            onClick={ () => console.log('Icon button presionado') }
+            onClick={ onClickCloseMenu }
             sx={{
               p: 0
             }}
@@ -102,7 +127,7 @@ export const Navbar = () => {
           </IconButton>
         </Toolbar>
         <Divider />
-        <NavListItem listItem={ listItem } />
+        <NavListItem listItem={ listItem } width={ widthDrawer } />
       </Drawer>
     </>
   )

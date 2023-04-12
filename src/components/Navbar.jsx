@@ -77,11 +77,9 @@ export const Navbar = () => {
     setStyleAppBar( classes.appBarFront );
   }
 
-  useEffect(() => {
-    
+  useEffect(() => {  
   }, [ open ])
   
-   
   return (
     <>
       <AppBar className={ styleAppBar }>

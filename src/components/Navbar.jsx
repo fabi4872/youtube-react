@@ -154,7 +154,7 @@ export const Navbar = () => {
         <Divider />
         <NavListItem 
           listItem={ listItem } 
-          width={ widthDrawer } 
+          widthDrawer={ widthDrawer } 
           maxWidthDrawer={ maxWidthDrawer } />
       </Drawer>
     </>

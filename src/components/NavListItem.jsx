@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
+import { Box, Button, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
 import { LoginOutlined } from '@mui/icons-material';
 
@@ -23,21 +23,24 @@ export const NavListItem = ({ listItem, widthDrawer, maxWidthDrawer }) => {
   
   return (
     <>
-      <Toolbar>
-        <Box
-          sx={{
-            width: { width },
-            bgcolor: '#FFFFFF'
-          }}
+      <Grid
+        container
+        direction='column'
+        wrap='noWrap'
+        justifyContent='space-between'
+        alignItems='center'
+        sx={{ height: "100%" }}
+      >
+        <Grid
+          item
         >
           <List>
             {
               listItem.map(( item ) => (
                 <ListItem
                   key={ item.id }
-                  disablePadding
                   sx={{
-                    marginY: 3
+                    marginY: 0.5
                   }}
                 >
                   {
@@ -67,10 +70,39 @@ export const NavListItem = ({ listItem, widthDrawer, maxWidthDrawer }) => {
               ))
             }
           </List>
-        </Box>
-      </Toolbar>
+        </Grid>
 
-      { 
+        <Grid
+          item
+        >
+          <Button
+            variant='contained'
+            color='primary'
+            sx={{
+              p: 1.5,
+              mx: 1.5,
+              mb: 5
+            }}
+          >
+            {
+              (width != maxWidthDrawer)
+              ?
+              <LoginOutlined />
+              :
+              <Box
+                display='flex'
+                justifyContent="center"
+                alignItems='center'
+              >
+                <LoginOutlined sx={{ mr: 1.5 }} />
+                <Typography variant='subtitle2'>Cerrar sesión</Typography>
+              </Box>
+            }
+          </Button>
+        </Grid>
+      </Grid>
+
+      {/* { 
         ( width != maxWidthDrawer ) 
         ? 
         <Box
@@ -105,7 +137,7 @@ export const NavListItem = ({ listItem, widthDrawer, maxWidthDrawer }) => {
             Cerrar sesión
           </Button>
         </Box>
-      }    
+      }     */}
     </>
   )
 }

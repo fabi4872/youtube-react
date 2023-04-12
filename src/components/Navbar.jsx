@@ -85,7 +85,7 @@ export const Navbar = () => {
       <AppBar className={ styleAppBar }>
         <Toolbar
           sx={{
-            mx: 2.5
+            mx: 2.7
           }}
         >
           <IconButton
@@ -123,6 +123,8 @@ export const Navbar = () => {
 
       <Drawer 
         variant='permanent'
+        open={ open }
+        sx={{ height: "100%" }}
       >
         <Toolbar
           className='headDrawerHeight'

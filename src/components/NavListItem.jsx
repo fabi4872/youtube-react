@@ -1,45 +1,47 @@
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
 
-export const NavListItem = ({ listItem, width }) => {  
+export const NavListItem = ({ listItem, width, maxWidthDrawer }) => {  
   return (
     <>
-      <Box
-        sx={{
-          width: { width },
-          bgcolor: "#FFFFFF",
-          display: 'flex'
-        }}
-      >
-        <List>
-          {
-            listItem.map((item) => (
-              <ListItem
-                key={item.id}
-                disablePadding
-              >
-                <ListItemButton
+      <Toolbar>
+        <Box
+          sx={{
+            width: { width },
+            bgcolor: '#FFFFFF'
+          }}
+        >
+          <List>
+            {
+              listItem.map((item) => (
+                <ListItem
+                  key={item.id}
+                  disablePadding
                   sx={{
-
-                    
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    
+                    marginY: 3
                   }}
                 >
-                  <ListItemIcon>
-                    {item.componente}
-                  </ListItemIcon>
-
-                  {(width == 240) && <ListItemText primary={item.descripcion} />}
-
-                </ListItemButton>
-              </ListItem>
-            ))
-          }
-        </List>
-      </Box>
+                  {
+                    (width != maxWidthDrawer)
+                      ?
+                      <Button sx={{
+                        marginX: 0
+                      }}>
+                        {item.componente}
+                      </Button>
+                      :
+                      <ListItemButton>
+                        <ListItemIcon>
+                          {item.componente}
+                        </ListItemIcon>
+                        <ListItemText primary={item.descripcion} />
+                      </ListItemButton>
+                  }
+                </ListItem>
+              ))
+            }
+          </List>
+        </Box>
+      </Toolbar>
     </>
   )
 }

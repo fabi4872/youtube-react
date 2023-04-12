@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { AppBar, Divider, Drawer, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { makeStyles } from '@material-ui/core/styles';
@@ -5,9 +6,15 @@ import { styled } from '@mui/material/styles';
 import { NavListItem } from './NavListItem';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { useEffect, useState } from 'react';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import ViewInArIcon from '@mui/icons-material/ViewInAr';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import SettingsIcon from '@mui/icons-material/Settings';
+
+const maxWidthDrawer = 240;
+const minWidthDrawer = 30;
 
 const Offset = styled('div')(( { theme } ) => theme.mixins.toolbar );
 
@@ -27,7 +34,27 @@ const listItem = [
   {
     id: 1,
     descripcion: 'Reportes',
-    componente: <AddBoxIcon />
+    componente: <AnalyticsIcon />
+  },
+  {
+    id: 2,
+    descripcion: 'Productos',
+    componente: <ViewInArIcon />
+  },
+  {
+    id: 3,
+    descripcion: 'Pedidos',
+    componente: <ListAltIcon />
+  },
+  {
+    id: 4,
+    descripcion: 'Entregas',
+    componente: <LocalShippingIcon />
+  },
+  {
+    id: 5,
+    descripcion: 'Configuración',
+    componente: <SettingsIcon />
   }
 ]
 
@@ -35,18 +62,18 @@ export const Navbar = () => {
   const classes = useStyles();
 
   const [ open, setOpen ] = useState( false );
-  const [ widthDrawer, setWidthDrawer ] = useState( 30 );
+  const [ widthDrawer, setWidthDrawer ] = useState( minWidthDrawer );
   const [ styleAppBar, setStyleAppBar ] = useState( classes.appBarFront );
   
   const onClickOpenMenu = () => {
     setOpen( true );
-    setWidthDrawer( 240 );
+    setWidthDrawer( maxWidthDrawer );
     setStyleAppBar( classes.appBarBack );
   }
 
   const onClickCloseMenu = () => {
     setOpen( false );
-    setWidthDrawer( 30 );
+    setWidthDrawer( minWidthDrawer );
     setStyleAppBar( classes.appBarFront );
   }
 
@@ -60,7 +87,7 @@ export const Navbar = () => {
       <AppBar className={ styleAppBar }>
         <Toolbar
           sx={{
-            mx: 2
+            mx: 2.5
           }}
         >
           <IconButton
@@ -127,7 +154,10 @@ export const Navbar = () => {
           </IconButton>
         </Toolbar>
         <Divider />
-        <NavListItem listItem={ listItem } width={ widthDrawer } />
+        <NavListItem 
+          listItem={ listItem } 
+          width={ widthDrawer } 
+          maxWidthDrawer={ maxWidthDrawer } />
       </Drawer>
     </>
   )

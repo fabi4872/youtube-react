@@ -26,7 +26,6 @@ export const NavListItem = ({ listItem, widthDrawer, maxWidthDrawer }) => {
       <Grid
         container
         direction='column'
-        wrap='noWrap'
         justifyContent='space-between'
         alignItems='center'
         sx={{ height: "100%" }}
@@ -101,43 +100,6 @@ export const NavListItem = ({ listItem, widthDrawer, maxWidthDrawer }) => {
           </Button>
         </Grid>
       </Grid>
-
-      {/* { 
-        ( width != maxWidthDrawer ) 
-        ? 
-        <Box
-          bottom={ 50 }
-          left={ 25 }
-          position='absolute'
-        >
-          <Button 
-            variant='contained' 
-            color='primary'
-            sx={{
-              px: 2.5
-            }}
-          >           
-            <LoginOutlined />
-          </Button>
-        </Box>
-        :
-        <Box
-          bottom={ 50 }
-          left={ 43 }
-          position='absolute'
-        >
-          <Button 
-            variant='contained' 
-            color='primary'
-            sx={{
-              px: 3.4
-            }}
-          >      
-            <LoginOutlined sx={{ pr: 1.5 }} />     
-            Cerrar sesión
-          </Button>
-        </Box>
-      }     */}
     </>
   )
 }

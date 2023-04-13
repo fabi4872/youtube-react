@@ -14,7 +14,7 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 const maxWidthDrawer = 240;
-const minWidthDrawer = 30;
+const minWidthDrawer = 120;
 
 const Offset = styled('div')(( { theme } ) => theme.mixins.toolbar );
 
@@ -85,7 +85,7 @@ export const Navbar = () => {
       <AppBar className={ styleAppBar }>
         <Toolbar
           sx={{
-            mx: 2.7
+            mx: 3
           }}
         >
           <IconButton
@@ -124,10 +124,21 @@ export const Navbar = () => {
       <Drawer 
         variant='permanent'
         open={ open }
-        sx={{ height: "100%" }}
+        sx={{
+          width: `${ widthDrawer }px`,
+          transition: 'width 0.5s ease',
+        }}
+        PaperProps={{
+          sx: {
+            width: `${ widthDrawer }px`,
+            transition: 'width 0.5s ease',
+            minWidth: `${ minWidthDrawer }px`,
+            overflow: 'hidden',
+          }
+        }}
       >
         <Toolbar
-          className='headDrawerHeight'
+          className={ classes.headDrawerHeight }
           sx={{
             justifyContent: 'space-between',
             alignItems: 'center'

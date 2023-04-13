@@ -7,14 +7,6 @@ import { NavListItem } from './NavListItem';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
-import ViewInArIcon from '@mui/icons-material/ViewInAr';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import SettingsIcon from '@mui/icons-material/Settings';
-
-const maxWidthDrawer = 240;
-const minWidthDrawer = 120;
 
 const Offset = styled('div')(( { theme } ) => theme.mixins.toolbar );
 
@@ -30,35 +22,7 @@ const useStyles = makeStyles( (theme) => ({
   }
 }))
 
-const listItem = [
-  {
-    id: 1,
-    descripcion: 'Reportes',
-    componente: <AnalyticsIcon />
-  },
-  {
-    id: 2,
-    descripcion: 'Productos',
-    componente: <ViewInArIcon />
-  },
-  {
-    id: 3,
-    descripcion: 'Pedidos',
-    componente: <ListAltIcon />
-  },
-  {
-    id: 4,
-    descripcion: 'Entregas',
-    componente: <LocalShippingIcon />
-  },
-  {
-    id: 5,
-    descripcion: 'Configuración',
-    componente: <SettingsIcon />
-  }
-]
-
-export const Navbar = () => {  
+export const Navbar = ({ minWidthDrawer, maxWidthDrawer, listItem, onClickMenuButton }) => {  
   const classes = useStyles();
 
   const [ open, setOpen ] = useState( false );
@@ -69,12 +33,14 @@ export const Navbar = () => {
     setOpen( true );
     setWidthDrawer( maxWidthDrawer );
     setStyleAppBar( classes.appBarBack );
+    onClickMenuButton( maxWidthDrawer );
   }
 
   const onClickCloseMenu = () => {
     setOpen( false );
     setWidthDrawer( minWidthDrawer );
     setStyleAppBar( classes.appBarFront );
+    onClickMenuButton( minWidthDrawer );
   }
 
   useEffect(() => {  
@@ -82,7 +48,7 @@ export const Navbar = () => {
   
   return (
     <>
-      <AppBar className={ styleAppBar }>
+      <AppBar className={ styleAppBar } >
         <Toolbar
           sx={{
             mx: 3

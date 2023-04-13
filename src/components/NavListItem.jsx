@@ -28,7 +28,9 @@ export const NavListItem = ({ listItem, widthDrawer, maxWidthDrawer }) => {
         direction='column'
         justifyContent='space-between'
         alignItems='center'
-        sx={{ height: "100%" }}
+        sx={{ 
+          height: '100%' 
+        }}
       >
         <Grid
           item
@@ -90,7 +92,7 @@ export const NavListItem = ({ listItem, widthDrawer, maxWidthDrawer }) => {
               :
               <Box
                 display='flex'
-                justifyContent="center"
+                justifyContent='center'
                 alignItems='center'
               >
                 <LoginOutlined sx={{ mr: 1.5 }} />

@@ -80,8 +80,6 @@ export const NavListItem = ({ listItem, widthDrawer, maxWidthDrawer }) => {
             variant='contained'
             color='primary'
             sx={{
-              p: 1.5,
-              mx: 1.5,
               mb: 5
             }}
           >

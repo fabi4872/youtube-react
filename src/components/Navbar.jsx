@@ -62,6 +62,7 @@ export const Navbar = ({ minWidthDrawer, maxWidthDrawer, listItem, onClickMenuBu
   }, [ open ])
 
   useEffect(() => {
+    setOpen( false );
     ( drawerAnchor === 'left' ) ? onClickMenuButton( 0 ) : onClickCloseMenu();
   }, [ drawerAnchor ])
 

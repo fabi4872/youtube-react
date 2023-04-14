@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { AppBar, Divider, Drawer, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,8 @@ import { NavListItem } from './NavListItem';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { useTheme } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
 
 const Offset = styled('div')(( { theme } ) => theme.mixins.toolbar );
 
@@ -24,31 +26,48 @@ const useStyles = makeStyles( (theme) => ({
 
 export const Navbar = ({ minWidthDrawer, maxWidthDrawer, listItem, onClickMenuButton }) => {  
   const classes = useStyles();
-
+  const theme = useTheme();
+  const isXsOrSm = useMediaQuery( theme.breakpoints.down( 'sm' ) );
   const [ open, setOpen ] = useState( false );
   const [ widthDrawer, setWidthDrawer ] = useState( minWidthDrawer );
   const [ styleAppBar, setStyleAppBar ] = useState( classes.appBarFront );
-  
+  const [ drawerVariant, setDrawerVariant ] = useState( isXsOrSm ? undefined : 'permanent' );
+  const [ drawerAnchor, setDrawerAnchor ] = useState( isXsOrSm ? 'left' : undefined );
+ 
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      const newIsXsOrSm = window.innerWidth < theme.breakpoints.values.sm;
+      setDrawerVariant( newIsXsOrSm ? undefined : 'permanent' );
+      setDrawerAnchor( newIsXsOrSm ? 'left' : undefined );
+    };
+    window.addEventListener( 'resize', handleResize );
+    return () => window.removeEventListener( 'resize', handleResize );
+  }, [ theme.breakpoints.values.sm ]);
+
   const onClickOpenMenu = () => {
     setOpen( true );
     setWidthDrawer( maxWidthDrawer );
     setStyleAppBar( classes.appBarBack );
-    onClickMenuButton( maxWidthDrawer );
+    ( drawerAnchor === 'left' ) ? onClickMenuButton( 0 ) : onClickMenuButton( maxWidthDrawer );
   }
 
   const onClickCloseMenu = () => {
     setOpen( false );
     setWidthDrawer( minWidthDrawer );
     setStyleAppBar( classes.appBarFront );
-    onClickMenuButton( minWidthDrawer );
+    ( drawerAnchor === 'left' ) ? onClickMenuButton( 0 ) : onClickMenuButton( minWidthDrawer );
   }
 
   useEffect(() => {  
   }, [ open ])
-  
+
+  useEffect(() => {
+    ( drawerAnchor === 'left' ) ? onClickMenuButton( 0 ) : onClickCloseMenu();
+  }, [ drawerAnchor ])
+
   return (
     <>
-      <AppBar className={ styleAppBar } >
+      <AppBar className={ styleAppBar } color='secondary' >
         <Toolbar
           sx={{
             mx: 3
@@ -88,7 +107,8 @@ export const Navbar = ({ minWidthDrawer, maxWidthDrawer, listItem, onClickMenuBu
       <Offset />
 
       <Drawer 
-        variant='permanent'
+        variant={ drawerVariant }
+        anchor={ drawerAnchor }
         open={ open }
         sx={{
           width: `${ widthDrawer }px`,

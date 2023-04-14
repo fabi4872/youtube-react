@@ -78,7 +78,7 @@ export const NavListItem = ({ listItem, widthDrawer, maxWidthDrawer }) => {
         >
           <Button
             variant='contained'
-            color='primary'
+            color='secondary'
             sx={{
               mb: 5
             }}
